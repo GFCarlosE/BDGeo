@@ -29,19 +29,6 @@ CREATE TABLE coordinates (
     lng FLOAT
 );
 
--- Tabla Detail_Attractive
-CREATE TABLE detail_attractive (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    description VARCHAR(200),
-    tecnique VARCHAR(50),
-    material VARCHAR(50),
-    size VARCHAR(50),
-    style VARCHAR(50),
-    city VARCHAR(50),
-    country VARCHAR(50),
-    address VARCHAR(100)
-);
-
 -- Tabla User
 CREATE TABLE user (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -51,8 +38,58 @@ CREATE TABLE user (
     email VARCHAR(30)
 );
 
--- Tabla Attractive
-CREATE TABLE attractive (
+-- Tabla Tecnique
+CREATE TABLE tecnique (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50)
+);
+-- Tabla Style
+CREATE TABLE style (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50)
+);
+-- Tabla Material
+CREATE TABLE material (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50)
+);
+-- Tabla Address
+CREATE TABLE address (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100)
+);
+-- Tabla City
+CREATE TABLE city (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50)
+);
+-- Tabla Country
+CREATE TABLE country (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(60)
+);
+
+-- Tabla Detail_Attraction
+CREATE TABLE detail_attraction (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    description VARCHAR(200),
+    size VARCHAR(50),
+    tecnique_id INT,
+    material_id INT,
+    style_id INT,
+    city_id INT,
+    country_id INT,
+    address_id INT,
+	FOREIGN KEY (tecnique_id) REFERENCES tecnique(id),
+    FOREIGN KEY (material_id) REFERENCES material(id),
+    FOREIGN KEY (style_id) REFERENCES style(id),
+    FOREIGN KEY (city_id) REFERENCES city(id),
+    FOREIGN KEY (country_id) REFERENCES country(id),
+    FOREIGN KEY (address_id) REFERENCES address(id)
+);
+
+-- Tabla Attraction
+CREATE TABLE attraction (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100),
     img VARCHAR(150),
@@ -62,7 +99,7 @@ CREATE TABLE attractive (
     id_coordinates INT,
     id_mac_address INT,
     id_user INT,
-    FOREIGN KEY (id_detail) REFERENCES detail_attractive(id),
+    FOREIGN KEY (id_detail) REFERENCES detail_attraction(id),
     FOREIGN KEY (id_category) REFERENCES category(id),
     FOREIGN KEY (id_author) REFERENCES author(id),
     FOREIGN KEY (id_coordinates) REFERENCES coordinates(id),
