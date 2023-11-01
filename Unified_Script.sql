@@ -106,3 +106,35 @@ CREATE TABLE attraction (
     FOREIGN KEY (id_mac_address) REFERENCES mac_address(id),
     FOREIGN KEY (id_user) REFERENCES user(id)
 );
+
+-- Modificacion password
+ALTER TABLE user MODIFY COLUMN password VARCHAR(255);
+
+-- Modificacion img
+ALTER TABLE attraction MODIFY img JSON;
+
+-- Inserciones category
+
+-- Inserciones author
+
+-- Inserciones mac_address
+
+-- Inserciones coordinates
+
+-- Inserciones user
+
+-- Inserciones tecnique
+
+-- Inserciones style
+
+-- Inserciones material
+
+-- Inserciones address
+
+-- Inserciones city
+
+-- Inserciones country
+
+-- Inserciones detail_attraction
+
+-- Inserciones attraction
