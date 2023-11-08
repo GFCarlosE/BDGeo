@@ -354,3 +354,147 @@ VALUES
     ('Estacionamiento_4', '["https://salle-images-bucket.s3.amazonaws.com/estacionamiento_4.jpeg"]', 1, 1, 1, 1, 1, 1),
     ('Estacionamiento_maestros', '["https://salle-images-bucket.s3.amazonaws.com/estacionamiento_maestros.jpeg"]', 1, 1, 1, 1, 1, 1),
     ('Estacionamiento_7', '["https://salle-images-bucket.s3.amazonaws.com/estacionamiento_7.jpeg"]', 1, 1, 1, 1, 1, 1);
+
+-- Inserción faltante en detail_attraction
+INSERT INTO detail_attraction (description, size, tecnique_id, material_id, style_id, city_id, country_id, address_id)
+VALUES ('Cancha', 'PorDefinir', 1, 1, 1, 1, 1, 1);
+
+-- Modificaciones tabla id_detail 
+SET @id_detail = 0;
+UPDATE attraction
+SET id_detail = (@id_detail := @id_detail + 1)
+WHERE id BETWEEN 1 AND 45;
+
+-- Añadir los campos para la creación, actualización y eliminación de un registro
+-- Para la tabla 'category'
+ALTER TABLE category
+ADD created_at DATETIME,
+ADD updated_at DATETIME,
+ADD is_deleted bool;
+
+-- Para la tabla 'author'
+ALTER TABLE author
+ADD created_at DATETIME,
+ADD updated_at DATETIME,
+ADD is_deleted bool;
+
+-- Para la tabla 'mac_address'
+ALTER TABLE mac_address
+ADD created_at DATETIME,
+ADD updated_at DATETIME,
+ADD is_deleted bool;
+
+-- Para la tabla 'coordinates'
+ALTER TABLE coordinates
+ADD created_at DATETIME,
+ADD updated_at DATETIME,
+ADD is_deleted bool;
+
+-- Para la tabla 'user'
+ALTER TABLE user
+ADD created_at DATETIME,
+ADD updated_at DATETIME,
+ADD is_deleted bool;
+
+-- Para la tabla 'tecnique'
+ALTER TABLE tecnique
+ADD created_at DATETIME,
+ADD updated_at DATETIME,
+ADD is_deleted bool;
+
+-- Para la tabla 'style'
+ALTER TABLE style
+ADD created_at DATETIME,
+ADD updated_at DATETIME,
+ADD is_deleted bool;
+
+-- Para la tabla 'material'
+ALTER TABLE material
+ADD created_at DATETIME,
+ADD updated_at DATETIME,
+ADD is_deleted bool;
+
+-- Para la tabla 'address'
+ALTER TABLE address
+ADD created_at DATETIME,
+ADD updated_at DATETIME,
+ADD is_deleted bool;
+
+-- Para la tabla 'city'
+ALTER TABLE city
+ADD created_at DATETIME,
+ADD updated_at DATETIME,
+ADD is_deleted bool;
+
+-- Para la tabla 'country'
+ALTER TABLE country
+ADD created_at DATETIME,
+ADD updated_at DATETIME,
+ADD is_deleted bool;
+
+-- Para la tabla 'detail_attraction'
+ALTER TABLE detail_attraction
+ADD created_at DATETIME,
+ADD updated_at DATETIME,
+ADD is_deleted bool;
+
+-- Para la tabla 'attraction'
+ALTER TABLE attraction
+ADD created_at DATETIME,
+ADD updated_at DATETIME,
+ADD is_deleted bool;
+
+-- Ajuste de registros correctos para id_detail
+UPDATE attraction SET id_detail = 45 WHERE id = 38;
+UPDATE attraction SET id_detail = 38 WHERE id = 39;
+UPDATE attraction SET id_detail = 39 WHERE id = 40;
+UPDATE attraction SET id_detail = 40 WHERE id = 41;
+UPDATE attraction SET id_detail = 41 WHERE id = 42;
+UPDATE attraction SET id_detail = 42 WHERE id = 43;
+UPDATE attraction SET id_detail = 43 WHERE id = 44;
+UPDATE attraction SET id_detail = 44 WHERE id = 45;
+
+-- Ajuste de registros correctos para coordenadas
+SET @coordinates = 0;
+UPDATE attraction
+SET attraction.id_coordinates = (@coordinates := @coordinates + 1)
+WHERE id BETWEEN 1 AND 45;
+
+-- Ajuste de registros correctos para id_coordinates
+UPDATE attraction SET id_coordinates = 45 WHERE id = 38;
+UPDATE attraction SET id_coordinates = 38 WHERE id = 39;
+UPDATE attraction SET id_coordinates = 39 WHERE id = 40;
+UPDATE attraction SET id_coordinates = 40 WHERE id = 41;
+UPDATE attraction SET id_coordinates = 41 WHERE id = 42;
+UPDATE attraction SET id_coordinates = 42 WHERE id = 43;
+UPDATE attraction SET id_coordinates = 43 WHERE id = 44;
+UPDATE attraction SET id_coordinates = 44 WHERE id = 45;
+
+-- Llenado de parámetro 'created_at' en todas las tablas
+UPDATE category SET created_at = NOW();
+
+UPDATE author SET created_at = NOW();
+
+UPDATE mac_address SET created_at = NOW();
+
+UPDATE coordinates SET created_at = NOW();
+
+UPDATE user SET created_at = NOW();
+
+UPDATE tecnique SET created_at = NOW();
+
+UPDATE style SET created_at = NOW();
+
+UPDATE material SET created_at = NOW();
+
+UPDATE address SET created_at = NOW();
+
+UPDATE city SET created_at = NOW();
+
+UPDATE country SET created_at = NOW();
+
+UPDATE detail_attraction SET created_at = NOW();
+
+UPDATE attraction SET created_at = NOW();
+
+-- Triggers
