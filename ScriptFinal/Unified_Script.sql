@@ -1,3 +1,6 @@
+CREATE DATABASE lasalle_geodb;
+USE lasalle_geodb;
+
 -- Tabla Category
 CREATE TABLE category (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -25,8 +28,8 @@ CREATE TABLE mac_address (
 -- Tabla Coordinates
 CREATE TABLE coordinates (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    lat FLOAT,
-    lng FLOAT
+    lat DECIMAL(20,10),
+    lng DECIMAL (20,10)
 );
 
 -- Tabla User
